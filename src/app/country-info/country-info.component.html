@@ -1,0 +1,54 @@
+<button
+  [ngClass]="
+    themeService.themeMode === 'dark' ? 'Back-Button-dark' : 'Back-Button'
+  "
+  (click)="goBack()"
+>
+  Go Back
+</button>
+
+<div
+  [ngClass]="themeService.themeMode === 'dark' ? 'container-dark' : 'container'"
+>
+  <div ng-container *ngFor="let i of countryData">
+    <div class="main-container">
+      <div>
+        <img class="images" src="{{ i.flag }}" alt="" />
+      </div>
+      <div class="information">
+        <p class="title">{{ i.name }}</p>
+        <div class="information-container">
+          <div>
+            <p><strong>Native Name:</strong> {{ i.nativeName }}</p>
+            <p><strong>population:</strong> {{ i.population }}</p>
+            <p><strong>Region:</strong> {{ i.region }}</p>
+            <p><strong>Sub Region:</strong> {{ i.subregion }}</p>
+            <p><strong>Capital:</strong> {{ i.capital }}</p>
+          </div>
+          <div>
+            <p><b>Top Level Domain:</b> {{ i.topLevelDomain }}</p>
+            <p><b>Currencies:</b> {{ i.currencies[0].name }}</p>
+            <p><b>Languages:</b> {{ i.languages[0].name }}</p>
+          </div>
+        </div>
+        <div class="border-countries">
+          <p><strong>Border Countries:</strong></p>
+          <button
+            [ngClass]="
+              themeService.themeMode === 'dark'
+                ? 'border-button-dark'
+                : 'border-button'
+            "
+            (click)="borders()"
+            *ngFor="let i of countryBorderData"
+            routerLink="/country/{{ i.name }}"
+          >
+            {{ i.name }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div></div>
+  </div>
+</div>

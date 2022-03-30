@@ -1,0 +1,56 @@
+<div>
+  <div class="Parent">
+    <div
+      [ngClass]="
+        themeService.themeMode === 'dark'
+          ? 'search-country-dark'
+          : 'search-country'
+      "
+    >
+      <mat-icon
+        [ngClass]="themeService.themeMode === 'dark' ? 'icon-dark' : 'icon'"
+        >search</mat-icon
+      >
+      <input
+        [ngClass]="themeService.themeMode === 'dark' ? 'search-dark' : 'search'"
+        [(ngModel)]="currentSearchName"
+        placeholder="Search For a Country ..."
+      />
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select
+          [(ngModel)]="currentRegionFilter"
+          (selectionChange)="returnCurrentValue()"
+        >
+          <mat-option *ngFor="let i of filters" [value]="i">
+            {{ i }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<div class="parent-countries">
+  <ng-container
+    *ngFor="let i of countriesData | filterCountries: currentSearchName"
+  >
+    <div
+      [ngClass]="
+        themeService.themeMode === 'dark' ? 'one-country-dark' : 'one-country'
+      "
+      *ngIf="
+        currentRegionFilter === 'All' ? true : i.region === currentRegionFilter
+      "
+      routerLink="/country/{{ i.name }}"
+    >
+      <img class="images" src="{{ i.flag }}" alt="" />
+      <p>{{ i.name }}</p>
+      <p>{{ i.population }}</p>
+      <p>{{ i.region }}</p>
+      <p>{{ i.capital }}</p>
+    </div>
+  </ng-container>
+</div>

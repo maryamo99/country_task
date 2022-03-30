@@ -1,0 +1,19 @@
+<div
+  [ngClass]="
+    themeService.themeMode === 'dark' ? 'nav-container-dark' : 'nav-container'
+  "
+>
+  <div class="title-container">
+    <img class="logo" src="./assets/alpega logo.png" alt="" />
+
+    <p>Where In The World ?</p>
+  </div>
+
+  <div class="dark-mode-container">
+    <img src="" alt="" />
+    <mat-icon class="moon">brightness_3</mat-icon>
+    <button class="theme-button" (click)="themeService.toggleTheme()">
+      Dark Mode
+    </button>
+  </div>
+</div>
